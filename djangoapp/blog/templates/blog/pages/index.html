@@ -4,12 +4,23 @@
   <main class="main-content section-wrapper">
     <div class="section-content-wide">
       <div class="section-gap">
+        
+        {% if page_obj %}
+          <div class="card-grid">
+            {% for post in page_obj %}
+              {% include 'blog/partials/_post-card.html' with i=forloop.counter0 %}
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="not-found center">
+            <h1>Nada encontrado ❌</h1>
+            <p>
+              Clique no link para voltar para a 
+              <a href="{% url 'blog:index' %}">página inicial</a>.
+            </p>
+          </div>
 
-        <div class="card-grid">
-          {% for post in page_obj %}
-            {% include 'blog/partials/_post-card.html' with i=forloop.counter0 %}
-          {% endfor %}
-        </div>
+        {% endif %}
 
       </div>
     </div>
